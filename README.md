@@ -44,6 +44,8 @@ $$Dice = \frac{2|X \cap Y|}{|X| + |Y|}$$
 - **이미지 크기:** 2048 x 2048
 - **클래스:** 손가락, 손등, 팔 포함 총 29개의 뼈 종류
 
+![X-ray_of_normal_hand](https://github.com/user-attachments/assets/5cb5c224-cfb3-4c4f-843c-bdcf49b03feb)
+
 
 ## 개발 환경
 
