@@ -1,30 +1,36 @@
+# Hand Bone Image Segmentation 대회
 
-# Hand Bone Image Segmentation 대회 
-- 2024.11.13 - 2024.11.28 
-- Hand Bone x-ray 객체가 담긴 이미지에 대한 Segmentation task
-- Naver Connect & Upstage 대회 
+**대회 기간:** 2024.11.13 - 2024.11.28  
+**주최:** Naver Connect & Upstage
 
-## Authors
+## 팀원
+- [이준학](https://github.com/danlee0113)
+- [김민환](https://github.com/alsghks1066)
+- [김준원](https://github.com/KimJunWon98)
+- [전인석](https://github.com/inDseok)
+- [신석준](https://github.com/SeokjunShin)
 
--  [이준학](https://github.com/danlee0113)  [김민환](https://github.com/alsghks1066)  [김준원](https://github.com/KimJunWon98)  [전인석](https://github.com/inDseok)  [신석준](https://github.com/SeokjunShin)
-
-
+---
 
 ## 대회 소개
+
+뼈는 인체의 구조와 기능에 매우 중요한 역할을 합니다. 특히 정확한 뼈 분할(Bone Segmentation)은 의료 진단과 치료 계획에 필수적입니다.
+
+본 대회에서는 X-ray 이미지 기반의 **Hand Bone Segmentation**을 수행하며, 손가락, 손등, 팔을 포함한 **총 29개의 뼈 클래스를 분할하는 것이 주요 과제**입니다.
+
+---
+
 ![image](https://github.com/user-attachments/assets/fe33f559-b68f-4db3-9aa9-228652154972)
-
-뼈는 우리 몸의 구조와 기능에 중요한 영향을 미치기 때문에, 정확한 뼈 분할은 의료 진단 및 치료 계획을 개발하는 데 필수적이다. 
-
-Bone Segmentation은 인공지능 분야에서 중요한 응용 분야 중 하나로, 특히, 딥러닝 기술을 이용한 뼈 Segmentation은 많은 연구가 이루어지고 있으며, 다양한 목적으로 도움을 줄 수 있다. 
-
-이번 프로젝트에서는 Hand Bone Segmentation을 진행하며, 손가락, 손등, 팔 뼈로 구성된 29개의 class에 대한 예측을 하는 것이 주요 task이다. 
-
 
 ## 평가 방법
 
-Test set의 Dice coefficient로 평가
+### Dice Coefficient
 
-Semantic Segmentation에서 사용되는 대표적인 성능 측정 방법
+Semantic Segmentation 분야에서 대표적으로 사용되는 평가 방법이며, 본 대회에서는 Test Set의 Dice 계수를 기준으로 성능을 평가합니다.
+
+$$Dice = \frac{2|X \cap Y|}{|X| + |Y|}$$
+
+---
 ![image](https://github.com/user-attachments/assets/4870dd87-34a0-492e-8032-43436783800f)
 
 
@@ -36,67 +42,67 @@ Semantic Segmentation에서 사용되는 대표적인 성능 측정 방법
 ![image](https://github.com/user-attachments/assets/5fd45d4a-1594-4a2f-bc90-78170688adb9)
 
 
-## Dataset
-- Train: 800, Label O  
-- Test: 288, Label X  
+## 데이터셋 정보
 
-- 이미지 크기: 2048 x 2048  
-- 손가락 / 손등 / 팔로 구성되며 29개의 뼈 종류가 존재
-
-
-## 개발 환경
-
-- GPU : v100
-
-
-## 협업 환경 
-- Notion으로 실험 관리와 정보 공유를 진행함.
-
-![image](https://github.com/user-attachments/assets/a6d68c64-da0e-4958-8cca-34da4cdec579)
-
-- Wandb로 실험 결과를 공유하고 모델의 학습 상황을 시각화함.
-
-![image](https://github.com/user-attachments/assets/6cf37168-f8fe-46ac-9b91-d248162b9580)
-
-## Models
-|Model|Features|Library|
-|------|---|---|
-|U-Net++|다중 skip connection을 사용해 다양한 스케일에서 특징을 통합, 세분화 성능을 개선함|SMP|
-|DeepLabV3+|Atrous Spatial Pyramid Pooling (ASPP)와 디코더 모듈을 결합해 다중 스케일 맥락 정보와 경계 복원을 강화함|SMP|
-|UPerNet|다양한 스케일의 특징을 통합하여 강력한 전역 표현을 생성하는 FPN 기반의 세그멘테이션 모델|SMP|
-
-## 데이터 증강 기법
-
-### 데이터 증강 기법 설명
-
-| 기법                     | 설명                                                                 |
-|--------------------------|---------------------------------------------------------------------|
-| **flip_lr (좌우 반전)**    | 이미지를 좌우로 뒤집어 대칭적인 데이터를 생성                             |
-| **flip_ud (상하 반전)**    | 이미지를 상하로 뒤집어 다양한 시각적 변형 데이터를 제공                       |
-| **rotate_90 (90도 회전)**  | 이미지를 시계 방향으로 90도 회전하여 방향성을 추가                      |
-| **rotate_270 (270도 회전)**| 이미지를 시계 방향으로 270도 회전하여 데이터 다양성을 극대화                 |
-
-### Albumentations 변환
-
-| 기법                        | 설명                                                                                     | 적용 확률 (p) |
-|-----------------------------|------------------------------------------------------------------------------------------|---------------|
-| **Resize (리사이즈)**        | 이미지를 1536 x 1536 크기로 변환                                   | -             |
-| **RandomBrightnessContrast**| 이미지의 밝기와 대비를 무작위로 조정                                               | 0.5           |
-| **CLAHE**                   | 제한 대비 적응 히스토그램 균일화(CLAHE)를 적용하며, 클립 한계는 2.0, 타일 그리드 크기는 (8, 8)로 설정 | 0.5           |
-| **Sharpen (샤프닝)**         | 이미지를 선명하게 하기 위해 알파 값(0.2–0.5)과 밝기(0.5–1.0)를 조정                  | 0.5           |
-| **GaussianBlur (가우시안 블러)**| 커널 크기 1에서 3 사이로 가우시안 블러를 적용                                        | 0.5           |
-
-### Interpolation
-| 기법                     | 설명                                                                 |
-|--------------------------|---------------------------------------------------------------------|
-| **Bilinear Interpolation**    | 대상 픽셀의 4개 인접 픽셀 값을 기반으로 선형 보간                           |
-| **Bicubic Interpolation**    | 대상 픽셀의 주변 16개 픽셀 값을 이용해 3차 함수로 보간                       |
-| **Lanczos Interpolation**  | Lanczos 커널을 사용해 픽셀 간의 sinc 함수 기반 보간                    |
+- **Train set:** 이미지 800장 (라벨 제공)
+- **Test set:** 이미지 288장 (라벨 미제공)
+- **이미지 크기:** 2048 x 2048
+- **클래스:** 손가락, 손등, 팔 포함 총 29개의 뼈 종류
 
 ---
 
+## 개발 환경
 
-## Conclusion
-- 데이터 증강을 통한 성능 향상
-- 이전 프로젝트보다 활발한 협업 툴 활용으로 효율적인 실험을 진행함
-- 시각화를 통한 모델의 장단점을 파악하는 것의 중요성을 알게 됨
+- **GPU:** NVIDIA V100
+
+---
+
+## 협업 환경
+
+- **Notion**을 통한 실험 관리 및 정보 공유
+- **Wandb**를 이용한 실험 결과 시각화 및 모델 학습 모니터링
+
+
+![image](https://github.com/user-attachments/assets/a6d68c64-da0e-4958-8cca-34da4cdec579)
+![image](https://github.com/user-attachments/assets/6cf37168-f8fe-46ac-9b91-d248162b9580)
+
+## 사용 모델
+
+| Model        | 특징                                                                                                    | Library |
+|--------------|---------------------------------------------------------------------------------------------------------|---------|
+| U-Net++      | 다중 skip connection을 통해 다양한 스케일의 특징을 통합, 세부 분할 성능 향상                                 | SMP     |
+| DeepLabV3+   | ASPP와 디코더 모듈을 활용하여 다중 스케일의 맥락 정보와 경계 표현을 강화                                  | SMP     |
+| UPerNet      | FPN 기반으로 다양한 스케일의 특징을 결합하여 강력한 전역적 표현 생성                                      | SMP     |
+
+## 데이터 증강 기법
+
+### 기본 증강 기법
+
+- **좌우 반전**
+- **상하 반전**
+- **90도 회전**
+- **270도 회전**
+
+### Albumentations 사용 증강 기법
+
+| 기법                       | 세부 내용                                                                           | 적용 확률 (p) |
+|----------------------------|-------------------------------------------------------------------------------------|---------------|
+| Resize                     | 1536 x 1536 크기로 이미지 조정                                                        | -             |
+| RandomBrightnessContrast   | 밝기와 대비를 무작위로 조정                                                          | 0.5           |
+| CLAHE                      | 제한된 대비 적응형 히스토그램 균일화 (클립 한계 2.0, 타일 그리드 (8,8))                | 0.5           |
+| Sharpen                    | 이미지 선명도 증가 (알파 0.2–0.5, 밝기 0.5–1.0)                                      | 0.5           |
+| GaussianBlur               | 가우시안 블러 적용 (커널 크기: 1–3)                                                  | 0.5           |
+
+### 보간 기법 (Interpolation)
+
+- **Bilinear Interpolation:** 인접 픽셀 4개 기반 선형 보간
+- **Bicubic Interpolation:** 주변 픽셀 16개 활용 3차 보간
+- **Lanczos Interpolation:** Lanczos 커널을 사용한 sinc 함수 기반 보간
+
+---
+
+## 결론 및 주요 인사이트
+
+- 데이터 증강이 성능 향상에 크게 기여함
+- 협업 툴(Notion, Wandb)을 통한 효율적이고 체계적인 실험 관리가 중요함
+- 시각화를 통해 모델의 강점과 약점을 명확하게 파악하는 것이 핵심임
