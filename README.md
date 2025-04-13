@@ -10,7 +10,6 @@
 - [전인석](https://github.com/inDseok)
 - [신석준](https://github.com/SeokjunShin)
 
----
 
 ## 대회 소개
 
@@ -18,7 +17,6 @@
 
 본 대회에서는 X-ray 이미지 기반의 **Hand Bone Segmentation**을 수행하며, 손가락, 손등, 팔을 포함한 **총 29개의 뼈 클래스를 분할하는 것이 주요 과제**입니다.
 
----
 
 ![image](https://github.com/user-attachments/assets/fe33f559-b68f-4db3-9aa9-228652154972)
 
@@ -30,7 +28,6 @@ Semantic Segmentation 분야에서 대표적으로 사용되는 평가 방법이
 
 $$Dice = \frac{2|X \cap Y|}{|X| + |Y|}$$
 
----
 
 
 ## 리더보드
@@ -47,13 +44,10 @@ $$Dice = \frac{2|X \cap Y|}{|X| + |Y|}$$
 - **이미지 크기:** 2048 x 2048
 - **클래스:** 손가락, 손등, 팔 포함 총 29개의 뼈 종류
 
----
 
 ## 개발 환경
 
 - **GPU:** NVIDIA V100
-
----
 
 ## 협업 환경
 
