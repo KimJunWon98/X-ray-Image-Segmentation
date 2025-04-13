@@ -4,9 +4,9 @@
 **주최:** Naver Connect & Upstage
 
 ## 팀원
+- [김준원](https://github.com/KimJunWon98)
 - [이준학](https://github.com/danlee0113)
 - [김민환](https://github.com/alsghks1066)
-- [김준원](https://github.com/KimJunWon98)
 - [전인석](https://github.com/inDseok)
 - [신석준](https://github.com/SeokjunShin)
 
@@ -31,8 +31,6 @@ Semantic Segmentation 분야에서 대표적으로 사용되는 평가 방법이
 $$Dice = \frac{2|X \cap Y|}{|X| + |Y|}$$
 
 ---
-![image](https://github.com/user-attachments/assets/4870dd87-34a0-492e-8032-43436783800f)
-
 
 
 ## 리더보드
