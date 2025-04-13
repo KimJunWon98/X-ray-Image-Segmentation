@@ -1,4 +1,4 @@
-# Hand Bone Image Segmentation 대회
+# Hand Bone Image Segmentation
 
 **대회 기간:** 2024.11.13 - 2024.11.28  
 **주최:** Naver Connect & Upstage
